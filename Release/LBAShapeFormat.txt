@@ -1,0 +1,45 @@
+------------------------------------
+ LBA shape file format
+ Author: Kazimierz Król (zink)
+ Revision: 1.0
+------------------------------------
+
+ Shape file is 47th entry of ress.hqr package for LBA 2. I don't know it's location (and if it even exists) for LBA 1.
+ 
+ The first block is the header block. If contains DWORD offsets of shapes inside the file. The length of header block may be determined by reading value of the first offset. The data block starts from byte given by the first offset, so header length is the value of the first offset. In the file there are first_offset/4-1 shapes. -1 is because last offset always means the file size, not shape address.
+ 
+ Each shape consists of two parts: one contain points coordinates, and second contains lines coordinates.
+ 
+ First byte is the colour value (colour index in palette).
+
+ Next the point block begins.
+ First byte of the point block says how many points the shape contains.
+ Next bytes are coordinates of these points. The coordinates are signed WORDs, so each point consists of 4 bytes - 2 bytes for x, and 2 for y. They are signed values, it means that they can be less than zero, and usually the (0,0) point is at the center of a shape.
+ Points are not "physical" (they are not visible), but they are only to be connected by lines.
+  
+ After all points coordinates the line block begins. It starts from point_counter*4+2 byte of the shape.
+ First byte of the line block is also counter. It says how many lines the shape contains. 
+ Next bytes are coordinates of these lines. Unlikely the points they are not on-screen coordinates, but each line consists of two bytes: they mean the numbers of points that the line is connecting. Points are indexed from 0. Length of line block is line_counter*2+1 (including the line_counter byte).
+
+ After the last line coordinates the next shape begins.
+
+ LBA 2 shape file contains 11 shapes:
+   0 - star (when Twinsen gets hit)
+   1 - piece of litter
+   2 - bone skull
+   3 - note (flying out of jukebox at Chez-Luc)
+   4 - heart (when somebody is kissing someone else)
+   5 - snoring "Z"
+   6 - light bulb with rays
+   7 - screw
+   8 - nut
+   9 - another star, but with different colour value
+  10 - another snoring "Z", but with different colour value
+
+
+--------------------------------------------------------------------
+ That is all I know. 
+ If you know something more, I will be grateful if you let me know.
+ e-mail:   zink@poczta.onet.pl
+ web page: www.emeraldmoon.prv.pl
+--------------------------------------------------------------------
