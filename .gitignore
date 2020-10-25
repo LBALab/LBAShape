@@ -1,5 +1,9 @@
-/Source/LBAPackEd/
-/Source/Libs/
+/Source/*.dpr
+/Source/*.dof
+/Source/*.cfg
+/Source/*.res
+/Source/*.dfm
+/Source/*.pas
 /Source/*.7z
 /Source/*.zip
 /Release/*.7z
